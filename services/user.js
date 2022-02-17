@@ -20,11 +20,11 @@ async function register(username, password) {
 async function login(usename, password) {
   const user = await getUserByUserName(usename);
   if (!user) {
-    throw new Error("User doesn't exist");
+    throw new Error("Incorect username or password");
   }
   const hasMatch = await compare(password, user.hashedPassword);
   if(!hasMatch){
-    throw new Error("Incorrect password");
+    throw new Error("Incorect username or password");
 
   }
   return user;
@@ -32,7 +32,7 @@ async function login(usename, password) {
 
 //TODO identify user by given identifier
 async function getUserByUserName(username) {
-  const user = User.findOne({ username }); // username:username
+  const user = User.findOne({ username: new RegExp(`^${username}$`,'i') }); // username:username
   return user;
 }
 

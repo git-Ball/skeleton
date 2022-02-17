@@ -7,6 +7,13 @@
     <title>Document</title>
 </head>
 <body>
-    {{body}}
+    {{#if errors}}
+<div>
+    {{#each errors}}
+    <p>{{msg}}</p>
+    {{/each}}
+</div>
+{{/if}}
+    {{{body}}}
 </body>
 </html>
